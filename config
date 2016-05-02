@@ -37,6 +37,12 @@ exec --no-startup-id xrandr --output LVDS-1 --primary --auto --output VGA-1 --au
 exec --no-startup-id xset s 1200 1200 
 #exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 
+mode "passthrough" {
+    bindsym Mod4+Escape mode "default"
+}
+bindsym Mod4+Escape mode "passthrough"
+
+
 # start a program
 bindsym $mod1+t exec --no-startup-id urxvt
 bindsym $mod1+w exec --no-startup-id chromium
@@ -44,8 +50,9 @@ bindsym $mod1+i exec --no-startup-id chromium --incognito
 bindsym $mod1+e exec --no-startup-id thunar
 bindsym $mod1+a exec --no-startup-id audacious
 bindsym $mod1+s exec --no-startup-id gvim
-bindsym $mod1+g exec --no-startup-id PULSE_PROP="filter.want=echo-cancel" skype
+#bindsym $mod1+g exec --no-startup-id PULSE_PROP="filter.want=echo-cancel" skype
 bindsym $mod1+k exec --no-startup-id gsimplecal
+bindsym $mod1+r exec --no-startup-id ~/.config/i3/dmenu_search.sh
 
 # kill focused window
 bindsym $mod1+F4 kill
@@ -56,7 +63,7 @@ bindsym $mod1+F4 kill
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn 'DejaVu Mono Sans-10' -l 10"
+bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --display-binary --use-xdg-de --dmenu="dmenu -i -fn 'DejaVu Mono Sans-10' -l 10" 
 
 # change focus
 #bindsym $mod+j focus left
@@ -135,8 +142,8 @@ bindsym $mod+Shift+0 move container to workspace 10
 workspace 1 output LVDS-1
 workspace 2 output VGA-1
 workspace 3 output LVDS-1
-workspace 4 output VGA-1
-
+workspace 4 output LVDS-1
+workspace 5 output VGA-1
 #mouse warping
 mouse_warping none
 
@@ -182,17 +189,16 @@ bar {
     
 colors {
         
- #       background #00000088
-        background #0a0a0a
+        background #222222
         statusline #1a8dff
         separator  #ff1a1b
 
 #       class               border  backgr. text
 	
-	focused_workspace  #0a0a0a #1a8dff #111111
-        active_workspace   #0a0a0a #5f676a #000000
-        inactive_workspace #0a0a0a #072a4c #1a8dff
-        urgent_workspace   #0a0a0a #ff1a1b #ffffff
+	focused_workspace  #222222 #1a8dff #111111
+        active_workspace   #222222 #5f676a #000000
+        inactive_workspace #222222 #072a4c #1a8dff
+        urgent_workspace   #222222 #ff1a1b #ffffff
 	
     }
 
@@ -218,12 +224,11 @@ colors {
 #assign [class="chromium"] 2
 assign [class="Audacious"] 3
 assign [class="Vlc"] 3
+assign [class="Claws-mail"] 5
 assign [class="Skype"] 3
 for_window [class="Skype"] floating enable
 assign [title="PlayOnLinux"] 3
 for_window [title="PlayOnLinux"] floating enable
-assign [class="Pidgin"] 3
-for_window [class="Pidgin"] floating enable
 
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
